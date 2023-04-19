@@ -36,4 +36,9 @@ public class MyArrayList<T> {
     public String get(int index) {
         return data[index];
     }
+
+    public boolean remove(int index) {
+        data[index] = null;
+        return true;
+    }
 }

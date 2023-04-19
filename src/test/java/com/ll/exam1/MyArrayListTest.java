@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MyArrayListTest {
 
@@ -56,4 +57,16 @@ class MyArrayListTest {
 
         assertThat(list.size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("remove(0)")
+    void t005() {
+        MyArrayList<String> list = new MyArrayList();
+        list.add("사과");
+        list.add("포도");
+        assertTrue(list.remove(0));
+        assertThat(list.get(0)).isEqualTo(null);
+    }
+
+
 }
