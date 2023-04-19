@@ -8,9 +8,31 @@ public class MyArrayList<T> {
     }
 
     public boolean add(String element) {
-        data[size] = element;
         size++;
+
+        makeNewDataIfNotEnough();
+
+        data[size-1] = element;
         return true;
+    }
+
+    private void makeNewDataIfNotEnough() {
+        if(isNotEnough()){
+            makeNewData();
+        }
+    }
+
+    private void makeNewData() {
+        String[] NewData = new String[data.length*2];
+
+        for (int i = 0; i < data.length; i++) {
+            NewData[i] = data[i];
+        }
+        data = NewData;
+    }
+
+    private boolean isNotEnough() {
+        return size >= data.length;
     }
 
     public String get(int index) {
