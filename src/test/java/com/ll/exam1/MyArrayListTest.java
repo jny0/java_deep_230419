@@ -44,7 +44,7 @@ class MyArrayListTest {
         MyArrayList<String> list = new MyArrayList<>();
 
         // 초기 배열의 길이
-        int dataLength1 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        int dataLength1 = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
 
         // IntStream.range(0, 10); = [0, ... 9] 까지의 int 스트림 발생
         // 딱 1번 넘칠만큼의 데이터를 넣는다.
@@ -52,7 +52,7 @@ class MyArrayListTest {
                 .forEach(index -> list.add("사과 %d".formatted(index)));
 
         // 현재 배열의 길이
-        int dataLength2 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        int dataLength2 = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
         assertThat(dataLength2).isGreaterThan(dataLength1);
     }
 
@@ -62,7 +62,7 @@ class MyArrayListTest {
         MyArrayList<String> list = new MyArrayList<>(200);
 
         // 초창기 배열의 길이
-        int dataLength = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        int dataLength = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
 
         assertThat(dataLength).isEqualTo(200);
     }
@@ -106,6 +106,14 @@ class MyArrayListTest {
         assertThat(list.indexOf("사과 100")).isEqualTo(-1);
     }
 
+    @Test
+    @DisplayName("add(true)")
+    void t009() {
+        MyArrayList<Boolean> list = new MyArrayList();
+        list.add(true);
+        list.add(false);
+        assertThat(list.size()).isEqualTo(2);
+    }
 
     @Test
     @DisplayName("remove(0)")
