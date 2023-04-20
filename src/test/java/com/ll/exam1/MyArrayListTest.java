@@ -4,6 +4,8 @@ import com.ll.TestUt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,21 +43,17 @@ class MyArrayListTest {
     void t4() {
         MyArrayList<String> list = new MyArrayList<>();
 
-        String[] data = TestUt.getFieldValue(list, "data", null);
-        assertThat(data.length).isEqualTo(2);
+        // 초기 배열의 길이
+        int dataLength1 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
 
-        list.add("사과");
-        list.add("포도");
+        // IntStream.range(0, 10); = [0, ... 9] 까지의 int 스트림 발생
+        // 딱 1번 넘칠만큼의 데이터를 넣는다.
+        IntStream.range(0, dataLength1 + 1)
+                .forEach(index -> list.add("사과 %d".formatted(index)));
 
-        data = TestUt.getFieldValue(list, "data", null);
-        assertThat(data.length).isEqualTo(2);
-
-        list.add("당근");
-
-        data = TestUt.getFieldValue(list, "data", null);
-        assertThat(data.length).isEqualTo(4);
-
-        assertThat(list.size()).isEqualTo(3);
+        // 현재 배열의 길이
+        int dataLength2 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        assertThat(dataLength2).isGreaterThan(dataLength1);
     }
 
     @Test

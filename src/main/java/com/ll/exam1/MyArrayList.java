@@ -2,7 +2,7 @@ package com.ll.exam1;
 
 public class MyArrayList<T> {
     private int size = 0;
-    private String[] data = new String[2];
+    private String[] data = new String[100];
     public int size() {
         return size;
     }
